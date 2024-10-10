@@ -18,3 +18,15 @@ import {Guarded} from "../core/utils/Guarded.sol";
 import {WAD, toInt256, add, sub, wmul, wdiv, mul, div} from "../core/utils/Math.sol";
 
 interface ISmartYield {
+    struct SeniorBond {
+        uint256 principal;
+        uint256 gain;
+        uint256 issuedAt;
+        uint256 maturesAt;
+        bool liquidated;
+    }
+
+    function controller() external view returns (address);
+
+    function pool() external view returns (address);
+
