@@ -30,3 +30,6 @@ interface ISmartYield {
 
     function pool() external view returns (address);
 
+    function seniorBond() external view returns (address);
+
+    function seniorBonds(uint256 bondId_) external view returns (SeniorBond memory);
