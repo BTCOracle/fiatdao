@@ -33,3 +33,9 @@ interface ISmartYield {
     function seniorBond() external view returns (address);
 
     function seniorBonds(uint256 bondId_) external view returns (SeniorBond memory);
+
+    function seniorBondId() external view returns (uint256);
+
+    function bondGain(uint256 principalAmount_, uint16 forDays_) external returns (uint256);
+
+    function buyBond(
