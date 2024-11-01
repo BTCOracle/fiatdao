@@ -39,3 +39,10 @@ interface ISmartYield {
     function bondGain(uint256 principalAmount_, uint16 forDays_) external returns (uint256);
 
     function buyBond(
+        uint256 principalAmount_,
+        uint256 minGain_,
+        uint256 deadline_,
+        uint16 forDays_
+    ) external returns (uint256);
+
+    function redeemBond(uint256 bondId_) external;
