@@ -46,3 +46,9 @@ interface ISmartYield {
     ) external returns (uint256);
 
     function redeemBond(uint256 bondId_) external;
+}
+
+interface ISmartYieldController {
+    function EXP_SCALE() external view returns (uint256);
+
+    function FEE_REDEEM_SENIOR_BOND() external view returns (uint256);
