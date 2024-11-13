@@ -52,3 +52,13 @@ interface ISmartYieldController {
     function EXP_SCALE() external view returns (uint256);
 
     function FEE_REDEEM_SENIOR_BOND() external view returns (uint256);
+
+    function underlyingDecimals() external view returns (uint256);
+}
+
+interface ISmartYieldProvider {
+    function uToken() external view returns (address);
+}
+
+/// @title VaultSY (BarnBridge Smart Yield Senior Bond Vault)
+/// @notice Collateral adapter for BarnBridge Smart Yield senior bonds
