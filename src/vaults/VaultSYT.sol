@@ -62,3 +62,13 @@ interface ISmartYieldProvider {
 
 /// @title VaultSY (BarnBridge Smart Yield Senior Bond Vault)
 /// @notice Collateral adapter for BarnBridge Smart Yield senior bonds
+/// @dev To be instantiated by Smart Yield market
+contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
+    using SafeERC20 for IERC20;
+
+    /// ======== Custom Errors ======== ///
+
+    error VaultSY__setParam_notLive();
+    error VaultSY__setParam_unrecognizedParam();
+    error VaultSY__enter_notLive();
+    error VaultSY__enter_overflow();
