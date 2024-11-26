@@ -72,3 +72,12 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     error VaultSY__setParam_unrecognizedParam();
     error VaultSY__enter_notLive();
     error VaultSY__enter_overflow();
+    error VaultSY__exit_overflow();
+    error VaultSY__wrap_maturedBond();
+    error VaultSY__unwrap_bondNotMatured();
+    error VaultSY__unwrap_notOwnerOfBond();
+    error VaultSY__updateBond_redeemedBond();
+
+    /// ======== Storage ======== ///
+
+    /// @notice Codex
