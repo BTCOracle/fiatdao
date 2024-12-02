@@ -81,3 +81,5 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// ======== Storage ======== ///
 
     /// @notice Codex
+    ICodex public immutable override codex;
+    /// @notice Price Feed
