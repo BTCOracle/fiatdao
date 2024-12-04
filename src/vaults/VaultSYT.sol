@@ -83,3 +83,8 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @notice Codex
     ICodex public immutable override codex;
     /// @notice Price Feed
+    ICollybus public override collybus;
+
+    // Bond Cache
+    struct Bond {
+        uint256 principal; // Cached value of (principal + gain) of the bond [underlierScale]
