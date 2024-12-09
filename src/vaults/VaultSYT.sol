@@ -88,3 +88,10 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     // Bond Cache
     struct Bond {
         uint256 principal; // Cached value of (principal + gain) of the bond [underlierScale]
+        uint256 conversion; // Cached value of principal / totalSupply(bondId) [wad]
+        uint128 maturity; // Cached maturity of bond [seconds]
+        uint64 owned; // True if the bond is owned by this contract [0, 1]
+        uint64 redeemed; // True after when updateBond is initially called after maturity [0, 1]
+    }
+
+    /// @notice Keeps track of deposited bonds because `ownerOf` reverts after bond is burned during redemption
