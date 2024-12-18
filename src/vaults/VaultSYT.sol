@@ -97,3 +97,5 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @notice Keeps track of deposited bonds because `ownerOf` reverts after bond is burned during redemption
     /// BondId => Bond
     mapping(uint256 => Bond) public bonds;
+
+    /// @notice Smart Yield Market (e.g. SY Compound USDC)
