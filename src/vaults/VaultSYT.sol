@@ -99,3 +99,9 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     mapping(uint256 => Bond) public bonds;
 
     /// @notice Smart Yield Market (e.g. SY Compound USDC)
+    ISmartYield public immutable market;
+    /// @notice Smart Yield Senior Bond ERC721 token
+    IERC721 public immutable seniorBond;
+
+    /// @notice Maximum amount of principal that can remain after a user redeems a partial amount
+    /// of tokens [underlierScale]
