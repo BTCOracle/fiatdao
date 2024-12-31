@@ -105,3 +105,12 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
 
     /// @notice Maximum amount of principal that can remain after a user redeems a partial amount
     /// of tokens [underlierScale]
+    uint256 public principalFloor;
+
+    /// @notice Collateral token
+    address public immutable override token;
+    /// @notice Scale of collateral token
+    uint256 public immutable override tokenScale; // == WAD for this implementation
+    /// @notice Underlier of collateral token (corresponds to a SY market)
+    address public immutable override underlierToken;
+    /// @notice Scale of underlier of collateral token
