@@ -114,3 +114,5 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @notice Underlier of collateral token (corresponds to a SY market)
     address public immutable override underlierToken;
     /// @notice Scale of underlier of collateral token
+    uint256 public immutable override underlierScale;
+
