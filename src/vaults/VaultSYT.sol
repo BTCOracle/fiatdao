@@ -116,3 +116,9 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @notice Scale of underlier of collateral token
     uint256 public immutable override underlierScale;
 
+    /// @notice The vault type
+    bytes32 public immutable override vaultType;
+
+    /// @notice Boolean indicating if this contract is live (0 - not live, 1 - live)
+    uint256 public override live;
+
