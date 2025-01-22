@@ -123,3 +123,15 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     uint256 public override live;
 
     /// ======== Events ======== ///
+
+    event SetParam(bytes32 indexed param, address data);
+    event SetParam(bytes32 indexed param, uint256 data);
+
+    event Enter(uint256 indexed tokenId, address indexed user, uint256 amount);
+    event Exit(uint256 indexed tokenId, address indexed user, uint256 amount);
+
+    event Wrap(uint256 indexed bondId, address indexed to);
+    event Unwrap(uint256 indexed tokenId, address indexed to);
+    event Unwrap(uint256 indexed tokenId, address indexed to, uint256 amount);
+
+    event BondUpdated(uint256 indexed bondId);
