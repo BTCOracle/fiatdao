@@ -135,3 +135,10 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     event Unwrap(uint256 indexed tokenId, address indexed to, uint256 amount);
 
     event BondUpdated(uint256 indexed bondId);
+
+    event Lock();
+
+    constructor(
+        address codex_,
+        address collybus_,
+        address market_,
