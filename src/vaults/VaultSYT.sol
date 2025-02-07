@@ -146,3 +146,5 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     ) Guarded() ERC1155(uri) {
         live = 1;
         codex = ICodex(codex_);
+        collybus = ICollybus(collybus_);
+
