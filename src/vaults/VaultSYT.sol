@@ -148,3 +148,11 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         codex = ICodex(codex_);
         collybus = ICollybus(collybus_);
 
+        market = ISmartYield(market_);
+        seniorBond = IERC721(ISmartYield(market_).seniorBond());
+
+        token = address(this);
+        // allows for using wmul and wdiv operations
+        tokenScale = WAD;
+        underlierToken = ISmartYieldProvider(ISmartYield(market_).pool()).uToken();
+        underlierScale = 10**ISmartYieldController(ISmartYield(market_).controller()).underlyingDecimals();
