@@ -156,3 +156,5 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         tokenScale = WAD;
         underlierToken = ISmartYieldProvider(ISmartYield(market_).pool()).uToken();
         underlierScale = 10**ISmartYieldController(ISmartYield(market_).controller()).underlyingDecimals();
+        vaultType = bytes32("ERC1155_W721:SY");
+    }
