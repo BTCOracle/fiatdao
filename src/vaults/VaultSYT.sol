@@ -162,3 +162,12 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// ======== Configuration ======== ///
 
     /// @notice Sets various variables for this contract
+    /// @dev Sender has to be allowed to call this method
+    /// @param param Name of the variable to set
+    /// @param data New value to set for the variable [address]
+    function setParam(bytes32 param, address data) external virtual override checkCaller {
+        if (live == 0) revert VaultSY__setParam_notLive();
+        if (param == "collybus") collybus = ICollybus(data);
+        else revert VaultSY__setParam_unrecognizedParam();
+        emit SetParam(param, data);
+    }
