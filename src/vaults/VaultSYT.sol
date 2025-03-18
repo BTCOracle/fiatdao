@@ -171,3 +171,7 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         else revert VaultSY__setParam_unrecognizedParam();
         emit SetParam(param, data);
     }
+
+    /// @notice Sets various variables for this contract
+    /// @dev Sender has to be allowed to call this method
+    /// @param param Name of the variable to set
