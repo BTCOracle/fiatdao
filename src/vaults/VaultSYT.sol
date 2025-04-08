@@ -182,3 +182,6 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         emit SetParam(param, data);
     }
 
+    /// ======== Bond Terms ======== ///
+
+    /// @notice Returns the bond terms
