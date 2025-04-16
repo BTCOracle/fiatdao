@@ -185,3 +185,10 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// ======== Bond Terms ======== ///
 
     /// @notice Returns the bond terms
+    /// @param bondId Id of the bond
+    /// @return principal Principal value of the bond [underlierScale]
+    /// @return maturity_ Maturity of the bond [seconds]
+    /// @return liquidated Boolean if the underlier has been redeemed for the matured bond [bool]
+    function terms(uint256 bondId)
+        public
+        view
