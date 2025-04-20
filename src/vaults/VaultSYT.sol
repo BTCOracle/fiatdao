@@ -192,3 +192,12 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     function terms(uint256 bondId)
         public
         view
+        returns (
+            uint256 principal,
+            uint256 maturity_,
+            bool liquidated
+        )
+    {
+        ISmartYield.SeniorBond memory bond = market.seniorBonds(bondId);
+        return (
+            add(
