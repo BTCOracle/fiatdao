@@ -201,3 +201,5 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         ISmartYield.SeniorBond memory bond = market.seniorBonds(bondId);
         return (
             add(
+                bond.principal,
+                // Using WAD here since its the same precision as in the SY market (EXP_SCALE)
