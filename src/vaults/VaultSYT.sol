@@ -203,3 +203,5 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
             add(
                 bond.principal,
                 // Using WAD here since its the same precision as in the SY market (EXP_SCALE)
+                sub(bond.gain, wmul(bond.gain, ISmartYieldController(market.controller()).FEE_REDEEM_SENIOR_BOND()))
+            ),
