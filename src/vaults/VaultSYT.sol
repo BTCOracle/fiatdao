@@ -206,3 +206,29 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
                 sub(bond.gain, wmul(bond.gain, ISmartYieldController(market.controller()).FEE_REDEEM_SENIOR_BOND()))
             ),
             bond.maturesAt,
+            bond.liquidated
+        );
+    }
+
+    /// ======== Wrapping and Unwrapping ======== ///
+
+    /// @notice Returns the amount of underliers of the matured bond that can be unwrapped for the wrapped tokens
+    /// @param bondId Id of the bond
+    /// @param amount Amount of wrapped tokens [tokenScale]
+    /// @return Amount of underlier [underlierScale]
+    function unwraps(uint256 bondId, uint256 amount) external view returns (uint256) {
+        uint256 principal;
+        // principal is fixed after bond has been redeemed for underlier (fee already deducated)
+        if (bonds[bondId].redeemed == 1) {
+            principal = bonds[bondId].principal;
+        } else {
+            (principal, , ) = terms(bondId);
+        }
+        uint256 conversion = wdiv(principal, totalSupply(bondId));
+        return wmul(amount, conversion);
+    }
+
+    /// @notice Wraps the claim on a senior bond principal at maturity as ERC1155 tokens
+    /// @param bondId Id of the bond
+    /// @param to Recipient of the wrapped tokens
+    /// @return Principal amount of wrapped bond [underlierScale]
