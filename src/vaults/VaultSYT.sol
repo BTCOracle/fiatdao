@@ -232,3 +232,8 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @param bondId Id of the bond
     /// @param to Recipient of the wrapped tokens
     /// @return Principal amount of wrapped bond [underlierScale]
+    function wrap(uint256 bondId, address to) external returns (uint256) {
+        (uint256 principal, uint256 _maturity, ) = terms(bondId);
+        if (block.timestamp >= _maturity) revert VaultSY__wrap_maturedBond();
+        // Cache bond terms
+        bonds[bondId] = Bond(principal, WAD, uint128(_maturity), 1, 0);
