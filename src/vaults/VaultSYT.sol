@@ -237,3 +237,11 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         if (block.timestamp >= _maturity) revert VaultSY__wrap_maturedBond();
         // Cache bond terms
         bonds[bondId] = Bond(principal, WAD, uint128(_maturity), 1, 0);
+
+        IERC721(seniorBond).transferFrom(msg.sender, address(this), bondId);
+        _mint(to, bondId, wdiv(principal, underlierScale), new bytes(0));
+
+        emit Wrap(bondId, to);
+
+        return principal;
+    }
