@@ -245,3 +245,10 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
 
         return principal;
     }
+
+    /// @notice Unwraps the fractionalized claim and returns the original senior bond ERC721 token
+    /// @dev Caller has to own the total supply of the wrapped tokens for that bond
+    /// @param bondId Id of the bond
+    /// @param to Recipient of unwrapped bond
+    function unwrap(uint256 bondId, address to) external {
+        _burn(msg.sender, bondId, totalSupply(bondId));
