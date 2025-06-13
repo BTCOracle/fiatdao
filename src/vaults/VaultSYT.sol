@@ -252,3 +252,9 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @param to Recipient of unwrapped bond
     function unwrap(uint256 bondId, address to) external {
         _burn(msg.sender, bondId, totalSupply(bondId));
+        IERC721(seniorBond).transferFrom(address(this), to, bondId);
+        bonds[bondId].owned = 0;
+
+        emit Unwrap(bondId, to);
+    }
+
