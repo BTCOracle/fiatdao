@@ -258,3 +258,17 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         emit Unwrap(bondId, to);
     }
 
+    /// @notice Redeems a proportional amount of the fractionalized claim on a matured senior bonds principal
+    /// @dev If the remaining amount of principal is less than `principalFloor` it is gifted to the caller
+    /// @param bondId Id of the bond
+    /// @param to Recipient of unwrapped bond
+    /// @param amount Amount of wrapped tokens to unwrap [tokenScale]
+    function unwrap(
+        uint256 bondId,
+        address to,
+        uint256 amount
+    ) external {
+        if (bonds[bondId].redeemed == 0) updateBond(bondId);
+        // use updated values
+        Bond memory bond = bonds[bondId];
+        if (bond.owned == 0) revert VaultSY__unwrap_notOwnerOfBond();
