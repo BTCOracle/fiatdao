@@ -272,3 +272,6 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         // use updated values
         Bond memory bond = bonds[bondId];
         if (bond.owned == 0) revert VaultSY__unwrap_notOwnerOfBond();
+        if (bond.maturity > block.timestamp) revert VaultSY__unwrap_bondNotMatured();
+
+        _burn(msg.sender, bondId, amount);
