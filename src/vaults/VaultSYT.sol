@@ -275,3 +275,18 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         if (bond.maturity > block.timestamp) revert VaultSY__unwrap_bondNotMatured();
 
         _burn(msg.sender, bondId, amount);
+
+        // if leftover is less than `principalFloor` then caller gets the entire remaining principal
+        uint256 share = wmul(wmul(amount, bond.conversion), underlierScale);
+        if (sub(bond.principal, share) < principalFloor) share = bond.principal;
+        bonds[bondId].principal = sub(bond.principal, share);
+
+        IERC20(underlierToken).safeTransfer(to, share);
+
+        emit Unwrap(bondId, to, amount);
+    }
+
+    /// ======== Entering and Exiting Collateral ======== ///
+
+    /// @notice Enters `amount` collateral into the system and credits it to `user`
+    /// @dev Caller has to set allowance for this contract
