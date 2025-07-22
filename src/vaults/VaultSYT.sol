@@ -290,3 +290,13 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
 
     /// @notice Enters `amount` collateral into the system and credits it to `user`
     /// @dev Caller has to set allowance for this contract
+    /// @param tokenId ERC1155 TokenId
+    /// @param user Address to whom the collateral should be credited to in Codex
+    /// @param amount Amount of collateral to enter [tokenScale]
+    function enter(
+        uint256 tokenId,
+        address user,
+        uint256 amount
+    ) external virtual override {
+        if (live == 0) revert VaultSY__enter_notLive();
+        int256 wad = toInt256(wdiv(amount, tokenScale));
