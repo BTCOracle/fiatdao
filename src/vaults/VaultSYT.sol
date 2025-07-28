@@ -300,3 +300,17 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     ) external virtual override {
         if (live == 0) revert VaultSY__enter_notLive();
         int256 wad = toInt256(wdiv(amount, tokenScale));
+        codex.modifyBalance(address(this), tokenId, user, int256(wad));
+        IERC1155(token).safeTransferFrom(msg.sender, address(this), tokenId, amount, new bytes(0));
+        emit Enter(tokenId, user, amount);
+    }
+
+    /// @notice Exits `amount` collateral into the system and credits it to `user`
+    /// @param tokenId ERC1155 or ERC721 style TokenId (leave at 0 for ERC20)
+    /// @param user Address to whom the collateral should be credited to
+    /// @param amount Amount of collateral to exit [tokenScale]
+    function exit(
+        uint256 tokenId,
+        address user,
+        uint256 amount
+    ) external virtual override {
