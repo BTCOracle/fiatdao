@@ -314,3 +314,4 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         address user,
         uint256 amount
     ) external virtual override {
+        int256 wad = toInt256(wdiv(amount, tokenScale));
