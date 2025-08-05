@@ -315,3 +315,6 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         uint256 amount
     ) external virtual override {
         int256 wad = toInt256(wdiv(amount, tokenScale));
+        codex.modifyBalance(address(this), tokenId, msg.sender, -int256(wad));
+        IERC1155(token).safeTransferFrom(address(this), user, tokenId, amount, new bytes(0));
+        emit Exit(tokenId, user, amount);
