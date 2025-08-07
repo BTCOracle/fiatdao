@@ -318,3 +318,4 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         codex.modifyBalance(address(this), tokenId, msg.sender, -int256(wad));
         IERC1155(token).safeTransferFrom(address(this), user, tokenId, amount, new bytes(0));
         emit Exit(tokenId, user, amount);
+    }
