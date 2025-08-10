@@ -319,3 +319,8 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         IERC1155(token).safeTransferFrom(address(this), user, tokenId, amount, new bytes(0));
         emit Exit(tokenId, user, amount);
     }
+
+    /// ======== Collateral Asset ======== ///
+
+    /// @notice Returns the maturity of a bond
+    /// @param bondId ERC1155 or ERC721 style TokenId (leave at 0 for ERC20)
