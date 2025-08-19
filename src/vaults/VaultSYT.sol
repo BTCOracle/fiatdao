@@ -325,3 +325,10 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @notice Returns the maturity of a bond
     /// @param bondId ERC1155 or ERC721 style TokenId (leave at 0 for ERC20)
     /// @return maturity [seconds]
+    function maturity(uint256 bondId) external view override returns (uint256) {
+        return uint256(bonds[bondId].maturity);
+    }
+
+    /// ======== Valuing Collateral ======== ///
+
+    /// @notice Updates a senior bond principal and conversion rate if SY fee schedule changes and
