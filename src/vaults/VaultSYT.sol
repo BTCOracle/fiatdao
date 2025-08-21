@@ -332,3 +332,5 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// ======== Valuing Collateral ======== ///
 
     /// @notice Updates a senior bond principal and conversion rate if SY fee schedule changes and
+    /// redeems the bond for the underlier after maturity
+    /// @param bondId Id of the bond
