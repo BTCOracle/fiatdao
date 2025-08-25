@@ -334,3 +334,5 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @notice Updates a senior bond principal and conversion rate if SY fee schedule changes and
     /// redeems the bond for the underlier after maturity
     /// @param bondId Id of the bond
+    function updateBond(uint256 bondId) public {
+        // principal is fixed after bond has been redeemed for underlier (fee already deducated)
