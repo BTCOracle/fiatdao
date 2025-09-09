@@ -336,3 +336,22 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @param bondId Id of the bond
     function updateBond(uint256 bondId) public {
         // principal is fixed after bond has been redeemed for underlier (fee already deducated)
+        if (bonds[bondId].redeemed == 1) revert VaultSY__updateBond_redeemedBond();
+
+        // recalculate principal of bond after fee change
+        (uint256 principal, uint256 _maturity, bool liquidated) = terms(bondId);
+        if (block.timestamp >= _maturity) {
+            // redeem if it hasn't been already
+            if (!liquidated) market.redeemBond(bondId);
+            // mark as redeemed if bond has been redeemed (liquidated)
+            bonds[bondId].redeemed = 1;
+        }
+        bonds[bondId].principal = principal;
+        bonds[bondId].conversion = wdiv(wdiv(principal, underlierScale), totalSupply(bondId));
+
+        emit BondUpdated(bondId);
+    }
+
+    /// @notice Returns the fair price of a single collateral unit
+    /// @param tokenId ERC1155 or ERC721 style TokenId (leave at 0 for ERC20)
+    /// @param net Boolean indicating whether the liquidation safety margin should be applied to the fair value
