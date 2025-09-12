@@ -355,3 +355,6 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @notice Returns the fair price of a single collateral unit
     /// @param tokenId ERC1155 or ERC721 style TokenId (leave at 0 for ERC20)
     /// @param net Boolean indicating whether the liquidation safety margin should be applied to the fair value
+    /// @param face Boolean indicating whether the current fair value or the fair value at maturity should be returned
+    /// @return fair price [wad]
+    function fairPrice(
