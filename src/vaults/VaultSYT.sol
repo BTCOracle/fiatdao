@@ -358,3 +358,6 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
     /// @param face Boolean indicating whether the current fair value or the fair value at maturity should be returned
     /// @return fair price [wad]
     function fairPrice(
+        uint256 tokenId,
+        bool net,
+        bool face
