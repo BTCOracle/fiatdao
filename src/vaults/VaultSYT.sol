@@ -361,3 +361,8 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
         uint256 tokenId,
         bool net,
         bool face
+    ) external view override returns (uint256) {
+        return
+            wmul(
+                ICollybus(collybus).read(
+                    address(this),
