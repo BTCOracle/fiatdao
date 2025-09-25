@@ -366,3 +366,9 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
             wmul(
                 ICollybus(collybus).read(
                     address(this),
+                    underlierToken,
+                    tokenId,
+                    (face) ? block.timestamp : uint256(bonds[tokenId].maturity),
+                    net
+                ),
+                bonds[tokenId].conversion
