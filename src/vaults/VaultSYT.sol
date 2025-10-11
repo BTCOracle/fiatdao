@@ -372,3 +372,16 @@ contract VaultSY is Guarded, IVault, ERC165, ERC1155Supply, ERC721Holder {
                     net
                 ),
                 bonds[tokenId].conversion
+            );
+    }
+
+    /// ======== ERC1155 ======== ///
+
+    function onERC1155Received(
+        address,
+        address,
+        uint256,
+        uint256,
+        bytes memory
+    ) external pure returns (bytes4) {
+        return this.onERC1155Received.selector;
